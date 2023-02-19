@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fake-api-ingress
+  namespace: app
+  # annotations:
+  #   kubernetes.io/ingress.class: "nginx"
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /fake-api/hello
+            pathType: Prefix
+            backend:
+              service:
+                name: fake-api-service
+                port:
+                  number: 80

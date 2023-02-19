@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fake-api-deployment
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fake-api
+  template:
+    metadata:
+     labels:
+       app: fake-api
+    spec:
+      containers:
+        - name: fake-api
+          image: straxseller/fake-api:v0.1
+          imagePullPolicy: IfNotPresent
+          name: fake-api
+          ports:
+            - containerPort: 80
