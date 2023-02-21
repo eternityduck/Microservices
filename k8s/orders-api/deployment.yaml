@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fake-api-deployment
+  name: orders-api-deployment
   namespace: app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fake-api
+      app: orders-api
   template:
     metadata:
      labels:
-       app: fake-api
+       app: orders-api
     spec:
       containers:
-        - name: fake-api
-          image: straxseller/fake-api:v0.1
+        - name: orders-api
+          image: straxseller/orders-api:v0.1
           imagePullPolicy: IfNotPresent
-          name: fake-api
+          name: orders-api
           ports:
             - containerPort: 80

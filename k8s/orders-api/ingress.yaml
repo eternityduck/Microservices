@@ -1,19 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: fake-api-ingress
+  name: orders-api-ingress
   namespace: app
-  # annotations:
-  #   kubernetes.io/ingress.class: "nginx"
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /fake-api/hello
+          - path: /orders
             pathType: Prefix
             backend:
               service:
-                name: fake-api-service
+                name: orders-api-service
                 port:
                   number: 80

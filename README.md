@@ -12,10 +12,10 @@ kubectl apply -f k8s/Common/app_namespace.yaml
 
 ### Створення сервісів
 ```
-kubectl apply -f k8s/fake-api/
+kubectl apply -f k8s/orders-api/
 ```
 
-### Доступ до fake-api
+### Доступ до orders-api
 ```
-localhost/fake-api/hello
+localhost/orders
 ```

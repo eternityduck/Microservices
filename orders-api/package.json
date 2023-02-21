@@ -1,5 +1,5 @@
 {
-  "name": "fake-api",
+  "name": "orders-api",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -24,6 +24,8 @@
     "@nestjs/common": "^7.6.15",
     "@nestjs/core": "^7.6.15",
     "@nestjs/platform-express": "^7.6.15",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6"
