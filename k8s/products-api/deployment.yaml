@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orders-api-deployment
+  name: products-api-deployment
   namespace: app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: orders-api
+      app: products-api
   template:
     metadata:
      labels:
-       app: orders-api
+       app: products-api
     spec:
       containers:
-        - name: orders-api
-          image: straxseller/orders-api:v0.1
+        - name: products-api
+          image: kivanval/products-api:v0.1
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80
+            - containerPort: 8080
