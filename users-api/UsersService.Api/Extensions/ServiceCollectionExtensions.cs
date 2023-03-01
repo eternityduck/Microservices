@@ -26,9 +26,9 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddDataServices(this IServiceCollection services)
     {
-        services.AddScoped<IUserRepository, FakeUserRepository>();
+        services.AddSingleton<IUserRepository, FakeUserRepository>();
 
-        services.AddScoped<IUnitOfWork, FakeUnitOfWork>();
+        services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
 
         return services;
     }

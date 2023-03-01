@@ -66,7 +66,7 @@ public sealed class UsersController : ControllerBase
     [ProducesResponseType(typeof(ErrorResult), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResult), StatusCodes.Status422UnprocessableEntity)]
     [ProducesResponseType(typeof(ErrorResult), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> UpdateAsync([FromRoute]int id, [FromBody] CreateUserModel model)
+    public async Task<IActionResult> UpdateAsync([FromRoute]int id, [FromBody] UpdateUserModel model)
     {
         var dto = _mapper.Map<UserDto>(model);
         dto.Id = id;
