@@ -1,6 +1,5 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UsersService.Api.Constants;
 using UsersService.Api.Models;

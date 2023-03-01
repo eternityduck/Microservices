@@ -82,8 +82,8 @@ public sealed class UserService : IUserService
         const int minAge = 14;
         if (user.BirthDay is not null 
             && (currentTime.Year - user.BirthDay.Value.Year < minAge  
-                || (currentTime.Year - user.BirthDay.Value.Year == minAge && user.BirthDay.Value.Month < currentTime.Month)
-                || (currentTime.Year - user.BirthDay.Value.Year == minAge && user.BirthDay.Value.Month == currentTime.Month && user.BirthDay.Value.Day <= currentTime.Day)))
+                || (currentTime.Year - user.BirthDay.Value.Year == minAge && user.BirthDay.Value.Month > currentTime.Month)
+                || (currentTime.Year - user.BirthDay.Value.Year == minAge && user.BirthDay.Value.Month == currentTime.Month && user.BirthDay.Value.Day >= currentTime.Day)))
         {
             throw new UnprocessableEntityException($"Minimal age allowed is {minAge}");
         }
