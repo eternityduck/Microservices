@@ -18,7 +18,7 @@
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <junit-platform-surefire-provider.version>1.2.0-M1</junit-platform-surefire-provider.version>
         <junit-jupiter-engine.version>5.2.0-M1</junit-jupiter-engine.version>
         <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
@@ -116,6 +116,11 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <dependencies>
                     <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-logger-api</artifactId>
+                        <version>${maven-surefire-plugin.version}</version>
+                    </dependency>
+                    <dependency>
                         <groupId>org.junit.platform</groupId>
                         <artifactId>junit-platform-surefire-provider</artifactId>
                         <version>${junit-platform-surefire-provider.version}</version>
@@ -126,13 +131,10 @@
                         <version>${junit-jupiter-engine.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>${exec-maven-plugin.version}</version>
                 <configuration>
-                    <mainClass>org.example.productapi.ProductApiApplication</mainClass>
+                    <forkCount>3</forkCount>
+                    <reuseForks>true</reuseForks>
+                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
                 </configuration>
             </plugin>
         </plugins>
