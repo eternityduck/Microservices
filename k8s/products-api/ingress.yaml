@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: products-api-ingress
+  namespace: app
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /products
+            pathType: Prefix
+            backend:
+              service:
+                name: products-api-service
+                port:
+                  number: 80

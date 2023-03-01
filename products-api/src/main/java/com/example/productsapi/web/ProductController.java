@@ -39,7 +39,7 @@ public class ProductController {
         var maybeProduct = productService.readById(id);
         if (maybeProduct.isPresent()) {
             Product product = maybeProduct.get();
-            productMapper.updateProductFromPayload(updateProductPayload, product);
+            productMapper.updateProduct(updateProductPayload, product);
             productService.update(product);
         }
         return ResponseEntity.of(maybeProduct.map(productMapper::toGetPayload));
