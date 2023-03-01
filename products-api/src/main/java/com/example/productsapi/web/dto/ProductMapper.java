@@ -10,5 +10,5 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 public interface ProductMapper {
     GetProductPayload toGetPayload(Product product);
 
-    void updateProduct(UpdateProductPayload payload, @MappingTarget Product product);
+    void updateProduct(CreateProductPayload payload, @MappingTarget Product product);
 }

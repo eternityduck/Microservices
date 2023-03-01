@@ -10,8 +10,9 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UpdateProductPayload {
+public class CreateProductPayload {
     String name;
     String description;
     double price;
+    long ownerId;
 }

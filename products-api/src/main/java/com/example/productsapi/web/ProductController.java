@@ -2,9 +2,9 @@ package com.example.productsapi.web;
 
 import com.example.productsapi.domain.Product;
 import com.example.productsapi.service.ProductService;
+import com.example.productsapi.web.dto.CreateProductPayload;
 import com.example.productsapi.web.dto.GetProductPayload;
 import com.example.productsapi.web.dto.ProductMapper;
-import com.example.productsapi.web.dto.UpdateProductPayload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +22,16 @@ public class ProductController {
     @Autowired
     ProductMapper productMapper;
 
+    @PutMapping("/{id}")
+    public ResponseEntity<GetProductPayload> create(@PathVariable long id,
+                                                    @RequestBody CreateProductPayload createProductPayload) {
+        var product = new Product();
+        productMapper.updateProduct(createProductPayload, product);
+        product.setId(id);
+        productService.create(product);
+        return ResponseEntity.ok(productMapper.toGetPayload(product));
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Collection<GetProductPayload> readAll() {
@@ -31,18 +41,6 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<GetProductPayload> readById(@PathVariable long id) {
         return ResponseEntity.of(productService.readById(id).map(productMapper::toGetPayload));
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<GetProductPayload> updateById(@PathVariable long id,
-                                                        @RequestBody UpdateProductPayload updateProductPayload) {
-        var maybeProduct = productService.readById(id);
-        if (maybeProduct.isPresent()) {
-            Product product = maybeProduct.get();
-            productMapper.updateProduct(updateProductPayload, product);
-            productService.update(product);
-        }
-        return ResponseEntity.of(maybeProduct.map(productMapper::toGetPayload));
     }
 
     @DeleteMapping("/{id}")
