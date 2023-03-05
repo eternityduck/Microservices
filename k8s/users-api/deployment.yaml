@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-api-deployment
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-api
+  template:
+    metadata:
+     labels:
+       app: users-api
+    spec:
+      containers:
+        - name: users-api
+          image: nktchrn/users-api:v0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
