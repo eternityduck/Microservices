@@ -14,10 +14,12 @@ kubectl apply -f k8s/Common/app_namespace.yaml
 ```
 kubectl apply -f k8s/orders-api/
 kubectl apply -f k8s/products-api/
+kubectl apply -f k8s/users-api/
 ```
 
 ### Access to services
 ```
 localhost/orders
 localhost/products
+localhost/users
 ```
