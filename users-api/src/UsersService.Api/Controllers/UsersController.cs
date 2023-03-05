@@ -10,7 +10,7 @@ using UsersService.Business.Interfaces.Services;
 namespace UsersService.Api.Controllers;
 [ApiController]
 [AllowAnonymous]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public sealed class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
