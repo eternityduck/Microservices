@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orders-api-deployment
+  name: frontend-deployment
   namespace: app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: orders-api
+      app: frontend
   template:
     metadata:
      labels:
-       app: orders-api
+       app: frontend
     spec:
       containers:
-        - name: orders-api
-          image: straxseller/orders-api:v0.1
+        - name: frontend
+          image: <placeholder>
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
