@@ -27,4 +27,10 @@ export class OrdersService {
     this.orders[index] = order;
     return this.orders[index];
   }
+  deleteOrder(id: number): Order {
+    const index = this.orders.findIndex(order => order.id === id);
+    const order = this.orders[index];
+    this.orders.splice(index, 1);
+    return order;
+  }
 }
