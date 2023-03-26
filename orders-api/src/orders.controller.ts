@@ -3,8 +3,6 @@ import { OrdersService } from './orders.service';
 import { Order } from './data/order';
 import { Param } from '@nestjs/common';
 import { BadRequestException } from '@nestjs/common/exceptions'
-import { CreateOrderDto } from './dto/createOrderDto'
-import { UpdateOrderDto } from './dto/updateOrderDto'
 
 @Controller('orders')
 export class OrdersController {
