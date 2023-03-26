@@ -1,36 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import {Order} from './data/order';
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { OrderEntity } from './entities/typeorm-order.entity';
 
 @Injectable()
 export class OrdersService {
-  private readonly orders: Order[] = [
-    new Order(1, 1, new Date(), new Date(), '123 Main St'),
-    new Order(2, 1, new Date(), new Date(), '123 Main St'),
-    new Order(3, 1, new Date(), new Date(), '123 Main St'),
-    new Order(4, 1, new Date(), new Date(), '123 Main St'),
-    new Order(5, 1, new Date(), new Date(), '123 Main St'),
-    new Order(6, 1, new Date(), new Date(), '123 Main St'),
-  ]
 
-  getOrders(): Order[] {
-    return this.orders;
+  constructor(
+    @InjectRepository(OrderEntity)
+    private ordersRepository: Repository<OrderEntity>,
+  ){}
+
+  getOrders(): Promise<OrderEntity[]> {
+    return this.ordersRepository.find();
   }
-  getOrder(id: number): Order {
-    return this.orders.find(order => order.id === id);
+
+  getOrder(id: number): Promise<OrderEntity | null> {
+    return this.ordersRepository.findOneBy({ id });
   }
-  createOrder(order: Order): Order[] {
-    this.orders.push(order);
-    return this.orders;
+
+  createOrder(order: OrderEntity): Promise<OrderEntity> {
+    const newOrder = this.ordersRepository.create(order);
+    return this.ordersRepository.save(newOrder);
   }
-  updateOrder(id: number, order: Order): Order{
-    const index = this.orders.findIndex(order => order.id === id);
-    this.orders[index] = order;
-    return this.orders[index];
+
+  async updateOrder(id: number, order: OrderEntity): Promise<OrderEntity>{
+    await this.ordersRepository.update(id, order);
+    const updatedOrder = await this.getOrder(id);
+    return updatedOrder;
   }
-  deleteOrder(id: number): Order {
-    const index = this.orders.findIndex(order => order.id === id);
-    const order = this.orders[index];
-    this.orders.splice(index, 1);
-    return order;
+  
+  async deleteOrder(id: number): Promise<OrderEntity> {
+    let order = await this.getOrder(id);
+    return this.ordersRepository.remove(order);
   }
 }
