@@ -15,11 +15,11 @@ jobs:
       matrix:
         include:
           - dockerfile: ./orders-api/Dockerfile
-            tag: ${{ secrets.DOCKER_HUB_USERNAME }}/orders-api:v0.1
+            tag: straxseller/orders-api:v0.1
           - dockerfile: ./products-api/Dockerfile
-            tag: ${{ secrets.DOCKER_HUB_USERNAME }}/products-api:v0.1
+            tag: straxseller/products-api:v0.1
           - dockerfile: ./users-api/Dockerfile
-            tag: ${{ secrets.DOCKER_HUB_USERNAME }}/users-api:v0.1
+            tag: straxseller/users-api:v0.1
             
     steps:
       - name: Check out the repo
