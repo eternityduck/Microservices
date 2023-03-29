@@ -16,10 +16,13 @@ jobs:
         include:
           - dockerfile: ./orders-api/Dockerfile
             tag: straxseller/orders-api:v0.1
+            context: ./orders-api/
           - dockerfile: ./products-api/Dockerfile
             tag: straxseller/products-api:v0.1
+            context: ./products-api/
           - dockerfile: ./users-api/Dockerfile
             tag: straxseller/users-api:v0.1
+            contextL: ./users-api/
             
     steps:
       - name: Check out the repo
