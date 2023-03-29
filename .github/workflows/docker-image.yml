@@ -22,7 +22,7 @@ jobs:
             context: ./products-api/
           - dockerfile: ./users-api/Dockerfile
             tag: straxseller/users-api:v0.1
-            contextL: ./users-api/
+            context: ./users-api/
             
     steps:
       - name: Check out the repo
@@ -37,7 +37,7 @@ jobs:
       - name: Build and push orders-api Docker image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ${{ matrix.context }}
           file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ matrix.tag }}
