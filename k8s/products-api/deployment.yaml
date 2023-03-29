@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: products-api
-          image: kivanval/products-api:v0.1
+          image: straxseller/products-api:v0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
