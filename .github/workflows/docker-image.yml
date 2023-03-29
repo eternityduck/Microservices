@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build and Push docker images
 
 on:
   push:
@@ -7,23 +7,20 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
           - dockerfile: ./orders-api/Dockerfile
-            tag: straxseller/orders-api:v0.1
+            tag: orders-api:v0.1
             context: ./orders-api/
           - dockerfile: ./products-api/Dockerfile
-            tag: straxseller/products-api:v0.1
+            tag: products-api:v0.1
             context: ./products-api/
           - dockerfile: ./users-api/Dockerfile
-            tag: straxseller/users-api:v0.1
-            context: ./users-api/
-            
+            tag: users-api:v0.1
+            context: ./users-api/   
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -40,4 +37,4 @@ jobs:
           context: ${{ matrix.context }}
           file: ${{ matrix.dockerfile }}
           push: true
-          tags: ${{ matrix.tag }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ matrix.tag }}
