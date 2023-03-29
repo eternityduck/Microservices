@@ -1,0 +1,40 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - dockerfile: ./orders-api/Dockerfile
+            tag: ${{ secrets.DOCKER_HUB_USERNAME }}/orders-api:v0.1
+          - dockerfile: ./products-api/Dockerfile
+            tag: ${{ secrets.DOCKER_HUB_USERNAME }}/products-api:v0.1
+          - dockerfile: ./users-api/Dockerfile
+            tag: ${{ secrets.DOCKER_HUB_USERNAME }}/users-api:v0.1
+            
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      
+      - name: Build and push orders-api Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          push: true
+          tags: ${{ matrix.tag }}
