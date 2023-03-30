@@ -7,6 +7,6 @@ public interface IUnitOfWork
     IUserRepository UserRepository { get; }
     #endregion
 
-    Task RollbackAsync();
+    void Rollback();
     Task SaveChangesAsync();
 }
