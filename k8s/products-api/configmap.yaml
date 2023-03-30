@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: app
+  name: orders-api-configmap
+  labels:
+    app: orders-api
+data:
+  POSTGRES_DB: products
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: admin
+  POSTGRES_HOST: postgres
+  POSTGRES_PORT: "5432"
