@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: users-api
-          image: nktchrn/users-api:v0.31
+          image: straxseller/users-api:v0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
