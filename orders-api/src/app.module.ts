@@ -8,15 +8,18 @@ import { ordersTable1679940251693 } from './migrations/1679940251693-orders-tabl
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
         type: 'postgres',
-        host: 'postgres-orders',
-        port: 5432,
-        database: 'orders',
-        username: 'postgres',
-        password: 'admin',
+        host: config.get('POSTGRES_HOST'),
+        port: config.get('POSTGRES_PORT') || 5432,
+        username: config.get('POSTGRES_USER'),
+        password: config.get('POSTGRES_PASSWORD'),
+        database: config.get('POSTGRES_NAME'),
         entities: [OrderEntity],
         autoLoadEntities: true,
         synchronize: false,
