@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: app
+  labels:
+    app: postgres
+  name: postgres-init-scripts
+data:
+  create-dbs.sql: |
+    CREATE DATABASE users;
+    CREATE DATABASE orders;
+    CREATE DATABASE products;
