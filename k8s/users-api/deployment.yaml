@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: users-api
-          image: straxseller/users-api:v0.1
+          image: straxseller/users-api:v0.2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80

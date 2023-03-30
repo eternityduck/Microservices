@@ -11,8 +11,8 @@ COPY ["src/UsersService.Api/UsersService.Api.csproj", "UsersService.Api/"]
 COPY ["src/UsersService.Business/UsersService.Business.csproj", "UsersService.Business/"]
 COPY ["src/UsersService.Data/UsersService.Data.csproj", "UsersService.Data/"]
 RUN dotnet restore "UsersService.Api/UsersService.Api.csproj"
-WORKDIR "/src/UsersService.Api"
 COPY . .
+WORKDIR "src/UsersService.Api"
 RUN dotnet build "UsersService.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
