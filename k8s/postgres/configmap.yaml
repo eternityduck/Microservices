@@ -2,10 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: app
-  name: postgres-secret-orders
+  name: postgres-secret
   labels:
-    app: postgres-orders
+    app: postgres
 data:
-  POSTGRES_DB: orders
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: admin

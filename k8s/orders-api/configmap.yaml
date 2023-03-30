@@ -9,4 +9,5 @@ data:
   POSTGRES_DB: orders
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: admin
-  POSTGRES_HOST: postgres-orders
+  POSTGRES_HOST: postgres
+  POSTGRES_PORT: "5432"
