@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using UsersService.Api.JsonConverters;
 using UsersService.Business;
@@ -8,15 +10,17 @@ using UsersService.Business.Services;
 using UsersService.Data;
 using UsersService.Data.Interfaces;
 using UsersService.Data.Interfaces.Repositories;
+using UsersService.Data.Persistence;
 using UsersService.Data.Repositories;
 
 namespace UsersService.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services, ConfigurationManager configuration)
     {
         return services
+            .AddDatabase(configuration)
             .AddDataServices()
             .AddBusinessServices()
             .AddAutoMapper()
@@ -24,11 +28,18 @@ public static class ServiceCollectionExtensions
             .AddApiServices();
     }
 
+    private static IServiceCollection AddDatabase(this IServiceCollection services, ConfigurationManager configuration) 
+    {
+        services.AddNpgsql<UsersDbContext>(configuration.GetConnectionString("UsersDatabase"));
+
+        return services;
+    }
+
     private static IServiceCollection AddDataServices(this IServiceCollection services)
     {
-        services.AddSingleton<IUserRepository, FakeUserRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
-        services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
