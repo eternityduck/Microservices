@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Polly;
 using UsersService.Data.Persistence;
 
 namespace UsersService.Api.Extensions;
@@ -10,7 +11,14 @@ public static class WebApplicationExtensions
         using var scope = app.Services.CreateScope();
 
         var db = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
-        db.Database.Migrate();
+        var migrateDbPolicy = Policy
+            .Handle<Exception>()
+            .WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(retryAttempt));
+
+        migrateDbPolicy.Execute(() =>
+        {
+            db.Database.Migrate();
+        });
 
         return app;
     }
