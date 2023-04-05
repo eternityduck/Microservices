@@ -46,7 +46,7 @@ function Orders() {
       .catch(error => console.error(error));
   };
 
-  const handleDelete = () => {
+  const handleDelete = (selectedOrder) => {
     axios.delete(`${BASE_URL}/orders/${selectedOrder.id}`)
       .then(() => {
         setSelectedOrder(null);
@@ -78,6 +78,7 @@ function Orders() {
             <th>Order Date</th>
             <th>Ship Date</th>
             <th>Ship Address</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -89,6 +90,7 @@ function Orders() {
               <td>{order.orderDate}</td>
               <td>{order.shipDate}</td>
               <td>{order.shipAddress}</td>
+              <td>{order.status}</td>
               <td>
                 <Button variant="primary" onClick={() => handleSelect(order)}>Edit</Button>{' '}
                 <Button variant="danger" onClick={() => handleDelete(order)}>Delete</Button>
@@ -106,7 +108,7 @@ function Orders() {
           <Form>
             <Form.Group controlId="formUserId">
               <Form.Label>User ID</Form.Label>
-              <Form.Control type="text" name="userId" value={form.userId || ''} onChange={handleChange          } />
+              <Form.Control type="text" name="userId" value={form.userId || ''} onChange={handleChange} />
         </Form.Group>
 
         <Form.Group controlId="formOrderDate">
@@ -122,6 +124,11 @@ function Orders() {
         <Form.Group controlId="formShipAddress">
           <Form.Label>Ship Address</Form.Label>
           <Form.Control type="text" name="shipAddress" value={form.shipAddress || ''} onChange={handleChange} />
+        </Form.Group>
+
+        <Form.Group controlId="formStatus">
+          <Form.Label>Status</Form.Label>
+          <Form.Control type="text" name="status" value={form.status || ''} onChange={handleChange} />
         </Form.Group>
       </Form>
     </Modal.Body>

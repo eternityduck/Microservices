@@ -1,82 +1,35 @@
-// import { useEffect, useState } from "react";
-// import "./App.css";
-
-// import AddForm from "./AddForm";
-// import OrdersService from "./api/OrdersService";
-// import OrdersList from "./OrdersList";
-
-// function App() {
-//   const [orders, setOrders] = useState([]);
-//   const [showForm, setShowForm] = useState(false);
-//   const [edited, setEdited] = useState({});
-
-//   function addOrder(newOrder) {
-//     const id = OrdersService.createOrder(newOrder);
-//     newOrder.id = id;
-//     setOrders([...orders, newOrder]);
-//   }
-//   function removeOrder(removedOrder) {
-//     OrdersService.deleteOrder(removedOrder.id);
-//     setOrders(orders.filter((p) => p.id !== removedOrder.id));
-//   }
-//   function addnewOrder() {
-//     setShowForm(!showForm);
-//   }
-//   function editOrder(editedOrder) {
-//     OrdersService.updateOrder(editedOrder);
-//     let newArr = [];
-//     orders.map((order) => {
-//       if (order.id === editedOrder.id) {
-//         order.userId = editedOrder.userId;
-//         order.shipAddress = editedOrder.shipAddress;
-//         order.shipDate = editedOrder.shipDate;
-//       }
-//       newArr.push(order);
-//     });
-
-//     setOrders([...newArr]);
-//   }
-
-//   useEffect(() => {
-//     getApi();
-//   }, []);
-//   async function getApi() {
-//     const response = await OrdersService.getAll();
-//     setOrders(response);
-//   }
-
-//   return (
-//     <div className="App">
-//       <div className="App__inner">
-//         <h1 className="list-title">Orders available</h1>
-//         <OrdersList orders={orders} remove={removeOrder} edit={editOrder} />
-//         <button className="hotel-btn addHotel-btn" onClick={addnewOrder}>
-//           Add new
-//         </button>
-
-//         {showForm && (
-//           <AddForm
-//             add={addOrder}
-//             edited={edited}
-//             setShowForm={setShowForm}
-//             showForm={showForm}
-//           />
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-import React from 'react';
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import Orders from './Orders';
+import Products from './Products';
+import Users from './Users';
 
 function App() {
+  const [activeComponent, setActiveComponent] = useState('Orders');
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'Orders':
+        return <Orders />;
+      case 'Products':
+        return <Products />;
+      case 'Users':
+        return <Users />;
+      default:
+        return <Orders />;
+    }
+  };
+
   return (
-    <div className="App">
-      <Orders />
+    <div>
+      <div class="ModeSelector">
+        <Button variant="primary" onClick={() => setActiveComponent('Orders')}>Orders</Button>
+        <Button variant="primary" onClick={() => setActiveComponent('Products')}>Products</Button>
+        <Button variant="primary" onClick={() => setActiveComponent('Users')}>Users</Button>
+      </div>
+      <div class="MainDisplay">
+          {renderComponent()}
+      </div>
     </div>
   );
 }

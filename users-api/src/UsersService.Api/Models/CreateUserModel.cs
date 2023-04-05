@@ -4,4 +4,5 @@ public sealed record CreateUserModel(
     string FirstName,
     string? LastName,
     string? PhoneNumber,
-    string? Email);
+    string? Email,
+    DateOnly? BirthDay);
