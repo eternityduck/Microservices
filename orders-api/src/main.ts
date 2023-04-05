@@ -13,6 +13,7 @@ async function bootstrap() {
     },
     forbidUnknownValues: false
   }));
+  app.enableCors();
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   await app.listen(80);
