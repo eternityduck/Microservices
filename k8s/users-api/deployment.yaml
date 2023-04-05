@@ -19,3 +19,6 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: users-api-configmap

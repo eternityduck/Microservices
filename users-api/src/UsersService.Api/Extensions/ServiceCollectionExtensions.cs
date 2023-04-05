@@ -1,7 +1,5 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using UsersService.Api.JsonConverters;
 using UsersService.Business;
@@ -17,10 +15,11 @@ namespace UsersService.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services, ConfigurationManager configuration)
+    public static IServiceCollection AddApplicationServices
+        (this IServiceCollection services, ConfigurationManager configuration, IWebHostEnvironment environment)
     {
         return services
-            .AddDatabase(configuration)
+            .AddDatabase(configuration, environment)
             .AddDataServices()
             .AddBusinessServices()
             .AddAutoMapper()
@@ -28,9 +27,27 @@ public static class ServiceCollectionExtensions
             .AddApiServices();
     }
 
-    private static IServiceCollection AddDatabase(this IServiceCollection services, ConfigurationManager configuration) 
+    private static IServiceCollection AddDatabase
+        (this IServiceCollection services, ConfigurationManager configuration, IWebHostEnvironment environment) 
     {
-        services.AddNpgsql<UsersDbContext>(configuration.GetConnectionString("UsersDatabase"));
+        string? connectionString;
+        
+        if (environment.IsDevelopment())
+        {
+            connectionString = configuration.GetConnectionString("UsersDatabase");
+        }
+        else
+        {
+            var pgHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
+            var pgPort = Environment.GetEnvironmentVariable("POSTGRES_PORT");
+            var pgDatabase = Environment.GetEnvironmentVariable("POSTGRES_DB");
+            var pgUser = Environment.GetEnvironmentVariable("POSTGRES_USER");
+            var pgPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+
+            connectionString = $"Host={pgHost};Port={pgPort};Database={pgDatabase};Username={pgUser};Password={pgPassword}";
+        }
+
+        services.AddNpgsql<UsersDbContext>(connectionString);
 
         return services;
     }
