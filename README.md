@@ -10,11 +10,21 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 kubectl apply -f k8s/Common/app_namespace.yaml
 ```
 
+### Create database
+```
+kubectl apply -f k8s/postgres/
+```
+
 ### Create services
 ```
 kubectl apply -f k8s/orders-api/
 kubectl apply -f k8s/products-api/
 kubectl apply -f k8s/users-api/
+```
+
+### Create UI
+```
+kubectl apply -f k8s/frontend/
 ```
 
 ### Access to services
