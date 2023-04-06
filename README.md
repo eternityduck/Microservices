@@ -33,3 +33,8 @@ localhost/orders
 localhost/products
 localhost/users
 ```
+
+### Access to UI
+```
+localhost/
+```
