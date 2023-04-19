@@ -1,17 +1,1 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: orders-api-ingress
-  namespace: app
-spec:
-  ingressClassName: nginx
-  rules:
-    - http:
-        paths:
-          - path: /orders
-            pathType: Prefix
-            backend:
-              service:
-                name: orders-api-service
-                port:
-                  number: 80
+{{- template "common.ingress" . -}}
