@@ -1,0 +1,13 @@
+apiVersion: v2
+appVersion: "0.1"
+dependencies:
+  - name: postgresql
+    version: 12.2.8
+    repository: https://charts.bitnami.com/bitnami
+  - name: common
+    version: 0.1.0
+    repository: file://charts/common
+description: Full
+name: microservices
+type: application
+version: 0.1.0
