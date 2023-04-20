@@ -40,9 +40,10 @@ localhost/
 ```
 
 ### HELM
-
+```
 helm dep build helm
 helm dep build helm/charts/<service-name>
 
 helm install <release-name> helm
 helm uninstall <release-name>
+```
