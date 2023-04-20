@@ -1,0 +1,22 @@
+container:
+  imageName: 
+  imageTag: 
+  image: straxseller/products-api:v0.1
+  name: products-api
+
+service:
+  ports:
+    - name: http
+      port: 80
+      containerPort: 80
+
+configs:
+  POSTGRES_DB: products
+  POSTGRES_HOST: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: admin
+  POSTGRES_PORT: '"5432"'
+
+ingress:
+  path: /products
+  port: http
