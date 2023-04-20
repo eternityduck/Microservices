@@ -13,7 +13,7 @@ public static class WebApplicationExtensions
         var db = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
         var migrateDbPolicy = Policy
             .Handle<Exception>()
-            .WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(retryAttempt));
+            .WaitAndRetry(4, retryAttempt => TimeSpan.FromSeconds(retryAttempt * 3));
 
         migrateDbPolicy.Execute(() =>
         {
