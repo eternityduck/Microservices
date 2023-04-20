@@ -1,0 +1,15 @@
+container:
+  imageName: 
+  imageTag: 
+  image: straxseller/frontend:v0.1
+  name: frontend
+
+service:
+  ports:
+    - name: http
+      port: 80
+      containerPort: 80
+
+ingress:
+  path: /
+  port: http
