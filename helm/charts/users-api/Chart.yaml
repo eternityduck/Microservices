@@ -1,0 +1,10 @@
+apiVersion: v2
+type: application
+version: 0.1.0
+name: users-api
+appVersion: "0.1"
+description: "users"
+dependencies:
+  - name: common
+    version: 0.1.0
+    repository: file://../common
