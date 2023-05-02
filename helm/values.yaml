@@ -8,9 +8,9 @@ postgresql:
     initdb:
       scripts:
         init.sql: |
-           CREATE DATABASE users;
-           CREATE DATABASE orders;
-           CREATE DATABASE products;
+          CREATE DATABASE users;
+          CREATE DATABASE orders;
+          CREATE DATABASE products;
     persistence:
       mountPath: /var/lib/postgresql/data
       size: 2Gi

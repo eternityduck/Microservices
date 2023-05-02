@@ -47,3 +47,19 @@ helm dep build helm/charts/<service-name>
 helm install <release-name> helm
 helm uninstall <release-name>
 ```
+
+## Important
+Delete pvcs before second redeploy
+```
+kubectl delete pvc/data-postgres-0
+```
+
+### ISTIO
+```
+kubectl create namespace istio-system
+helm repo add istio https://istio-release.storage.googleapis.com/charts
+helm install istiod istio/istiod -n istio-system --wait
+helm repo update
+kubectl label namespace default istio-injection=enabled
+kubectl apply -f istio 
+```
