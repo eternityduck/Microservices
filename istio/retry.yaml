@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: orders-api-virtual
+spec:
+  hosts:
+    - local-orders-api # ім'я Service до якого застосовується налаштування
+  http:
+    - route:
+        - destination:
+            host: local-orders-api # ім'я Service до якого застосовується налаштування
+      timeout: 5s
+      retries:
+        attempts: 2
+        retryOn: 5xx
+        perTryTimeout: 3s
