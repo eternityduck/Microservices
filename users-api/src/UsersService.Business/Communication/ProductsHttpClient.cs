@@ -40,7 +40,7 @@ public class ProductsHttpClient : IProductsHttpClient
 
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpRequestException($"ProductsService request failed. Status code: {response.StatusCode}. Response: {response}.");
+            throw new HttpRequestException($"ProductsService request failed. Request Uri: {message.RequestUri}. Status code: {response.StatusCode}. Response: {response}.");
         }
 
         var json = JObject.Parse(await response.Content.ReadAsStringAsync());
