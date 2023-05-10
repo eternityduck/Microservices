@@ -68,10 +68,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUserService, UserService>();
         services.AddHttpContextAccessor();
 
-        services.AddHttpClient<IProductsHttpClient, ProductsHttpClient>().ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
-        });
+        services.AddHttpClient<IProductsHttpClient, ProductsHttpClient>(c => c.BaseAddress = new("http://localhost/products"));
 
         return services;
     }

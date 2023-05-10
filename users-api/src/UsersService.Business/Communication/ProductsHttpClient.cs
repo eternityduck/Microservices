@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using UsersService.Business.Dtos;
+﻿using UsersService.Business.Dtos;
 using UsersService.Business.Interfaces.Communication;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json.Linq;
@@ -9,32 +8,17 @@ public class ProductsHttpClient : IProductsHttpClient
 {
     private readonly HttpClient _internalHttpClient;
 
-    private readonly IHttpContextAccessor _httpContextAccessor;
-
-    private readonly UriBuilder _ordersServiceUriBuilder;
-
-    public ProductsHttpClient(HttpClient internalHttpClient, IHttpContextAccessor httpContextAccessor)
+    public ProductsHttpClient(HttpClient internalHttpClient)
     {
         _internalHttpClient = internalHttpClient;
-        _httpContextAccessor = httpContextAccessor;
-
-        _ordersServiceUriBuilder = new UriBuilder
-        {
-            Scheme = _httpContextAccessor.HttpContext.Request.Scheme,
-            Host = _httpContextAccessor.HttpContext.Request.Host.Host,
-            Path = "products/search/findAllByOwnerId"
-        };
     }
 
     public async Task<IEnumerable<ProductsDto>> GetUserOrdersAsync(int userId)
     {
-        _ordersServiceUriBuilder.Query = QueryHelpers.AddQueryString(string.Empty, "ownerId", userId.ToString());
+        var requestPath = "products/search/findAllByOwnerId";
+        requestPath = QueryHelpers.AddQueryString(requestPath, "ownerId", userId.ToString());
 
-        var message = new HttpRequestMessage
-        {
-            Method = new(HttpMethod.Get.ToString()),
-            RequestUri = _ordersServiceUriBuilder.Uri
-        };
+        var message = new HttpRequestMessage(HttpMethod.Get, requestPath);
 
         var response = await _internalHttpClient.SendAsync(message);
 
