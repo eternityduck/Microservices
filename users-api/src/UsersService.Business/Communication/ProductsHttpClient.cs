@@ -22,7 +22,7 @@ public class ProductsHttpClient : IProductsHttpClient
         {
             Scheme = _httpContextAccessor.HttpContext.Request.Scheme,
             Host = _httpContextAccessor.HttpContext.Request.Host.Host,
-            Path = "products"
+            Path = "products/search/findAllByOwnerId"
         };
     }
 
