@@ -12,4 +12,6 @@ public sealed class UserDto
     public string? Email { get; set; }
 
     public DateOnly? BirthDay { get; set; }
+
+    public IEnumerable<ProductsDto> Products { get; set; } = new List<ProductsDto>();
 }

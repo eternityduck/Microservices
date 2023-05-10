@@ -3,6 +3,8 @@ using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using UsersService.Api.JsonConverters;
 using UsersService.Business;
+using UsersService.Business.Communication;
+using UsersService.Business.Interfaces.Communication;
 using UsersService.Business.Interfaces.Services;
 using UsersService.Business.Services;
 using UsersService.Data;
@@ -64,6 +66,9 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
         services.AddScoped<IUserService, UserService>();
+        services.AddHttpContextAccessor();
+
+        services.AddHttpClient<IProductsHttpClient, ProductsHttpClient>();
 
         return services;
     }
@@ -79,6 +84,7 @@ public static class ServiceCollectionExtensions
     {
         services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
         services.AddControllers()
+            .AddNewtonsoftJson()
             .AddJsonOptions(x =>
             {
                 x.JsonSerializerOptions.Converters.Add(new DateOnlyNullableJsonConverter());
