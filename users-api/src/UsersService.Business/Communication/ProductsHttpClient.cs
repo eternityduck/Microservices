@@ -24,10 +24,6 @@ public class ProductsHttpClient : IProductsHttpClient
             Host = _httpContextAccessor.HttpContext.Request.Host.Host,
             Path = "products"
         };
-        if (_httpContextAccessor.HttpContext.Request.Host.Port.HasValue)
-        {
-            _ordersServiceUriBuilder.Port = _httpContextAccessor.HttpContext.Request.Host.Port!.Value;
-        }
     }
 
     public async Task<IEnumerable<ProductsDto>> GetUserOrdersAsync(int userId)
