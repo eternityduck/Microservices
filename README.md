@@ -66,6 +66,7 @@ Make the request handling slow (10 sec latency; users-api): POST http://localhos
 ```
 kubectl create namespace istio-system
 helm repo add istio https://istio-release.storage.googleapis.com/charts
+helm install istio-base istio/base -n istio-system
 helm install istiod istio/istiod -n istio-system --wait
 helm repo update
 kubectl label namespace default istio-injection=enabled
