@@ -19,7 +19,7 @@ func main() {
 	for i := 0; i < concurrentRequests; i++ {
 		go func(count int) {
 			now := time.Now()
-			resp, err := http.Get("http://localhost/users")
+			resp, err := http.Get("http://localhost/products")
 			if err != nil {
 				errCount++
 				fmt.Printf("request %d failed to load response: %v \n", count, err)
