@@ -1,9 +1,9 @@
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: orders-service-destination
+  name: users-service-destination
 spec:
-  host: local-orders-api
+  host: local-users-api
   trafficPolicy:
     outlierDetection:
       consecutive5xxErrors: 5
