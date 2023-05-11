@@ -8,7 +8,8 @@ public sealed record UserResult(
     string? LastName,
     string? PhoneNumber,
     string? Email,
-    DateOnly? BirthDay)
+    DateOnly? BirthDay,
+    IEnumerable<ProductResult> Products)
 {
     public static UserResult Create(UserDto userDto)
         => new(
@@ -17,5 +18,6 @@ public sealed record UserResult(
             userDto.LastName, 
             userDto.PhoneNumber, 
             userDto.Email, 
-            userDto.BirthDay);
+            userDto.BirthDay,
+            userDto.Products.Select(o => ProductResult.Create(o)));
 }
