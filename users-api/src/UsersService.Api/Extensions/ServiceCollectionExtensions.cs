@@ -17,6 +17,8 @@ namespace UsersService.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
+    private const string s_releaseName = "LOCAL";
+
     public static IServiceCollection AddApplicationServices
         (this IServiceCollection services, ConfigurationManager configuration, IWebHostEnvironment environment)
     {
@@ -68,7 +70,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUserService, UserService>();
         services.AddHttpContextAccessor();
 
-        services.AddHttpClient<IProductsHttpClient, ProductsHttpClient>(c => c.BaseAddress = new("http://localhost/products"));
+        services.AddHttpClient<IProductsHttpClient, ProductsHttpClient>(c => c.BaseAddress = new($"http://{Environment.GetEnvironmentVariable($"{s_releaseName}_PRODUCTS_API_SERVICE_HOST")}/products"));
 
         return services;
     }
