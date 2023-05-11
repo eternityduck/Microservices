@@ -42,10 +42,13 @@ localhost/
 ### HELM
 ```
 helm dep build helm
-helm dep build helm/charts/<service-name>
+helm dep build helm/charts/orders-api
+helm dep build helm/charts/products-api
+helm dep build helm/charts/users-api
+helm dep build helm/charts/frontend
 
-helm install <release-name> helm
-helm uninstall <release-name>
+helm install local helm
+helm uninstall local
 ```
 
 ## Important
