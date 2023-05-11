@@ -1,7 +1,7 @@
 ﻿using UsersService.Business.Enums;
-using UsersService.Business.Interfaces.Providers;
+using UsersService.Business.Interfaces.Managers;
 
-namespace UsersService.Business.Providers;
+namespace UsersService.Business.Managers;
 
 public sealed class ServerStateManager : IServerStateManager
 {

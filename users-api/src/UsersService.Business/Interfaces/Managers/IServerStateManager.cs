@@ -1,6 +1,6 @@
 ﻿using UsersService.Business.Enums;
 
-namespace UsersService.Business.Interfaces.Providers;
+namespace UsersService.Business.Interfaces.Managers;
 
 public interface IServerStateManager
 {

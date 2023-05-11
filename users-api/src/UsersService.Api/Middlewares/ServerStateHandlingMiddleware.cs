@@ -1,4 +1,4 @@
-﻿using UsersService.Business.Interfaces.Providers;
+﻿using UsersService.Business.Interfaces.Managers;
 
 namespace UsersService.Api.Middlewares;
 

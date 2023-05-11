@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UsersService.Business.Enums;
-using UsersService.Business.Interfaces.Providers;
+using UsersService.Business.Interfaces.Managers;
 
 namespace UsersService.Api.Controllers;
 
