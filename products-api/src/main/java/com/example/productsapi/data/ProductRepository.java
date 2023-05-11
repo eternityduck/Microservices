@@ -1,4 +1,4 @@
-package com.example.productsapi.web;
+package com.example.productsapi.data;
 
 import com.example.productsapi.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
