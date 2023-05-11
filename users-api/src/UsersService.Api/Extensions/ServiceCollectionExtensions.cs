@@ -5,7 +5,9 @@ using UsersService.Api.JsonConverters;
 using UsersService.Business;
 using UsersService.Business.Communication;
 using UsersService.Business.Interfaces.Communication;
+using UsersService.Business.Interfaces.Managers;
 using UsersService.Business.Interfaces.Services;
+using UsersService.Business.Managers;
 using UsersService.Business.Services;
 using UsersService.Data;
 using UsersService.Data.Interfaces;
@@ -68,6 +70,7 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
         services.AddScoped<IUserService, UserService>();
+        services.AddSingleton<IServerStateManager, ServerStateManager>();
         services.AddHttpContextAccessor();
 
         services.AddHttpClient<IProductsHttpClient, ProductsHttpClient>(c => c.BaseAddress = new($"http://{Environment.GetEnvironmentVariable($"{s_releaseName}_PRODUCTS_API_SERVICE_HOST")}/products"));

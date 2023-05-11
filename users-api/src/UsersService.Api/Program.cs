@@ -23,6 +23,7 @@ app.UseCors("default");
 app.UseAuthorization();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseMiddleware<ServerStateHandlingMiddleware>();
 
 app.MapControllers();
 
