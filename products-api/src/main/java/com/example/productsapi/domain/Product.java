@@ -22,7 +22,7 @@ public class Product {
     String description;
     double price;
     @Column(name = "owner_id")
-    long ownerId;
+    int ownerId;
 
     @Override
     public boolean equals(Object o) {
