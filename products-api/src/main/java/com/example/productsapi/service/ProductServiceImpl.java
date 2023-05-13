@@ -6,6 +6,7 @@ import com.example.productsapi.domain.Product;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     final ProductRepository productRepository;
@@ -37,7 +39,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product save(Product product) {
         if (userRepository.existsById(product.getOwnerId())) {
-            return product;
+            log.info("save product with user (id={})", product.getOwnerId());
+            return productRepository.save(product);
         } else {
             throw new IllegalArgumentException("It is not possible to create a product with a user (id=%d)"
                     .formatted(product.getOwnerId()));
