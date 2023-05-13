@@ -12,7 +12,7 @@ function Products() {
 
   useEffect(() => {
     axios.get(`${BASE_URL}/products`)
-      .then(response => setProducts(response.data._embedded.products))
+      .then(response => setProducts(response.data))
       .catch(error => console.error(error));
   }, []);
 
@@ -27,32 +27,32 @@ function Products() {
         setForm({});
         setShowModal(false);
         axios.get(`${BASE_URL}/products`)
-          .then(response => setProducts(response.data._embedded.products))
+          .then(response => setProducts(response.data))
           .catch(error => console.error(error));
       })
       .catch(error => console.error(error));
   };
 
   const handleUpdate = () => {
-    axios.put(selectedProduct._links.self.href, form)
+    axios.put(`${BASE_URL}/products/${selectedProduct.id}`, form)
       .then(() => {
         setSelectedProduct(null);
         setForm({});
         setShowModal(false);
         axios.get(`${BASE_URL}/products`)
-          .then(response => setProducts(response.data._embedded.products))
+          .then(response => setProducts(response.data))
           .catch(error => console.error(error));
       })
       .catch(error => console.error(error));
   };
 
   const handleDelete = (selectedProduct) => {
-    axios.delete(selectedProduct._links.self.href)
+    axios.delete(`${BASE_URL}/products/${selectedProduct.id}`)
       .then(() => {
         setSelectedProduct(null);
         setShowModal(false);
         axios.get(`${BASE_URL}/products`)
-          .then(response => setProducts(response.data._embedded.products))
+          .then(response => setProducts(response.data))
           .catch(error => console.error(error));
       })
       .catch(error => console.error(error));
@@ -73,6 +73,7 @@ function Products() {
       <Table striped bordered hover>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
@@ -82,7 +83,8 @@ function Products() {
         </thead>
         <tbody>
           {products.map((product) => (
-            <tr key={product._links.self.href}>
+            <tr key={product.id}>
+              <td>{product.id}</td>
               <td>{product.name}</td>
               <td>{product.description}</td>
               <td>{product.price}</td>

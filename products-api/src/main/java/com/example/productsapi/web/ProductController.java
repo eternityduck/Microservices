@@ -25,13 +25,13 @@ public class ProductController {
     final ProductMapper productMapper;
 
     @GetMapping
-    public @ResponseBody ResponseEntity<List<ProductDto>> findAll() {
-        return ResponseEntity.ok(productMapper.toDto(productService.findAll()));
+    public @ResponseBody ResponseEntity<List<Product>> findAll() {
+        return ResponseEntity.ok(productService.findAll());
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<ProductDto> findById(@PathVariable Long id) {
-        return ResponseEntity.of(productService.findById(id).map(productMapper::toDto));
+    public @ResponseBody ResponseEntity<Product> findById(@PathVariable Long id) {
+        return ResponseEntity.of(productService.findById(id));
     }
 
     @PostMapping

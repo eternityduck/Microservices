@@ -3,9 +3,6 @@ spring:
     hikari:
       initialization-fail-timeout: 10000
     driver-class-name: org.postgresql.Driver
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
   jpa:
     hibernate:
       ddl-auto: update

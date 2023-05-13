@@ -11,11 +11,10 @@ service:
       containerPort: 8080
 
 configs:
-  POSTGRES_DB: products
-  POSTGRES_HOST: postgres
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: admin
-  POSTGRES_PORT: '"5432"'
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/products
+  SPRING_DATASOURCE_USERNAME: postgres
+  SPRING_DATASOURCE_PASSWORD: admin
+  USER_SERVICE_URI: 'http://local-users-api/users'
 
 ingress:
   path: /products
