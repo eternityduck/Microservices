@@ -4,9 +4,9 @@ WORKDIR /app
 
 COPY .mvn .mvn
 COPY mvnw pom.xml ./
-RUN ./mvnw install
-
 COPY src src
+
+RUN ./mvnw install
 
 ENTRYPOINT ["./mvnw", "spring-boot:run"]
 EXPOSE 8080
