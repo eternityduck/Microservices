@@ -19,7 +19,7 @@ public sealed class UsersController : ControllerBase
 
     public UsersController(IUserService userService, IMapper mapper)
     {
-        _userService= userService;
+        _userService = userService;
         _mapper = mapper;
     }
 
