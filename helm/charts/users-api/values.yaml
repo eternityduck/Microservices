@@ -1,3 +1,5 @@
+replicaCount: 2
+
 container:
   imageName: 
   imageTag: 
