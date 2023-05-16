@@ -59,7 +59,6 @@ kubectl delete pvc/data-postgres-0
 
 ### Testing
 ```
-Make the request handling slow (10 sec latency; products-api): GET http://localhost/products/fail
 Make the request handling slow (10 sec latency; users-api): POST http://localhost/users/untested-request
 ```
 
