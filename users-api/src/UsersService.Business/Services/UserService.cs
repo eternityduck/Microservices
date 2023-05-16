@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using UsersService.Business.Dtos;
 using UsersService.Business.Exceptions;
-using UsersService.Business.Interfaces.Communication;
 using UsersService.Business.Interfaces.Services;
 using UsersService.Data.Entities;
 using UsersService.Data.Interfaces;
@@ -13,13 +12,10 @@ public sealed class UserService : IUserService
 
     private readonly IMapper _mapper;
 
-    private readonly IProductsHttpClient _ordersServiceClient;
-
-    public UserService(IUnitOfWork unitOfWork, IMapper mapper, IProductsHttpClient ordersServiceClient)
+    public UserService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _ordersServiceClient = ordersServiceClient;
     }
 
     public async Task<IReadOnlyCollection<UserDto>> GetAllAsync()
@@ -34,10 +30,7 @@ public sealed class UserService : IUserService
         var user = await _unitOfWork.UserRepository.GetByIdAsync(userId)
             ?? throw new EntityNotFoundException($"User with id {userId} was not found");
 
-        var getProductsTask = _ordersServiceClient.GetUserOrdersAsync(user.Id);
-
         var result = _mapper.Map<UserDto>(user);
-        result.Products = await getProductsTask;
 
         return result;
     }
