@@ -63,24 +63,21 @@ Make the request handling slow (10 sec latency; users-api): POST http://localhos
 ```
 #### Testing results:
 **Normal** pods:
-<p align="center">
-  <img width="700" src="https://github.com/eternityduck/Microservices/blob/main/test/results/1-normal.png" alt="normal pods testing"/>
-</p>
+
+![normal pods testing](/test/results/1-normal.png)
 
 One **unhealthy** users-api pod:
-<p align="center">
-  <img width="700" src="https://github.com/eternityduck/Microservices/blob/main/test/results/2-broken.png" alt="1 unhealthy users-api pod testing"/>
-</p>
+
+![1 unhealthy users-api pod testing](/test/results/2-broken.png)
 
 One unhealthy users-api pod + **retry**:
-<p align="center">
-  <img width="700" src="https://github.com/eternityduck/Microservices/blob/main/test/results/3-broken-retry.png" alt="1 unhealthy users-api pod testing (with retry)"/>
-</p>
+
+![1 unhealthy users-api pod testing (with retry)](/test/results/3-broken-retry.png)
 
 One unhealthy users-api pod + **circuit breaker**:
-<p align="center">
-  <img width="700" src="https://github.com/eternityduck/Microservices/blob/main/test/results/4-broken-circuit-breaker.png" alt="1 unhealthy users-api pod testing (with circuit breaker)"/>
-</p>
+
+![1 unhealthy users-api pod testing (with circuit breaker)](/test/results/4-broken-circuit-breaker.png)
+
 
 ### ISTIO
 ```
