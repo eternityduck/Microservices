@@ -64,22 +64,22 @@ Make the request handling slow (10 sec latency; users-api): POST http://localhos
 #### Testing results:
 **Normal** pods:
 <p align="center">
-  <img width="700" src="https://github.com/eternityduck/Microservices/blob/master/test/results/1-normal.png" alt="normal pods testing"/>
+  <img width="700" src="https://github.com/eternityduck/Microservices/blob/main/test/results/1-normal.png" alt="normal pods testing"/>
 </p>
 
 One **unhealthy** users-api pod:
 <p align="center">
-  <img width="700" src="https://github.com/eternityduck/Microservices/blob/master/test/results/2-broken.png" alt="1 unhealthy users-api pod testing"/>
+  <img width="700" src="https://github.com/eternityduck/Microservices/blob/main/test/results/2-broken.png" alt="1 unhealthy users-api pod testing"/>
 </p>
 
 One unhealthy users-api pod + **retry**:
 <p align="center">
-  <img width="700" src="https://github.com/eternityduck/Microservices/blob/master/test/results/3-broken-retry.png" alt="1 unhealthy users-api pod testing (with retry)"/>
+  <img width="700" src="https://github.com/eternityduck/Microservices/blob/main/test/results/3-broken-retry.png" alt="1 unhealthy users-api pod testing (with retry)"/>
 </p>
 
 One unhealthy users-api pod + **circuit breaker**:
 <p align="center">
-  <img width="700" src="https://github.com/eternityduck/Microservices/blob/master/test/results/4-broken-circuit-breaker.png" alt="1 unhealthy users-api pod testing (with circuit breaker)"/>
+  <img width="700" src="https://github.com/eternityduck/Microservices/blob/main/test/results/4-broken-circuit-breaker.png" alt="1 unhealthy users-api pod testing (with circuit breaker)"/>
 </p>
 
 ### ISTIO
